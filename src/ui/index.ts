@@ -103,6 +103,7 @@ export { Tether } from './components/tether';
 export { Table, formatters } from './components/table';
 export { TablePaginator } from './components/table-paginator';
 export { addressInEntity } from './components/table/lib/formatters';
+export { parsePhoneNumberUS } from './components/table/lib/formatters';
 export { TabList, TabPanel, Tab, useTabs } from './components/tabs';
 export { Text, textColors } from './components/text';
 export { TemplateDownloadLink } from './components/template-download-link';
@@ -150,3 +151,6 @@ export type { CancelableCallback, Debounced } from './hooks/debounced-callback';
 export type { WindowSize } from './hooks/window-size';
 export type { Color } from './theme/colors';
 export type { SpacingValue, Color as DeprecatedColor } from './theme';
+
+// apps
+export { default as FormCompensationApplication } from './apps/form-compensation-application'
