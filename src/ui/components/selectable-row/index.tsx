@@ -10,12 +10,13 @@ import { IconRadioButton } from '../icons';
 import { Badge, BadgeType } from '../badge';
 
 interface Props {
+  id: string;
   title: string;
   subtitle?: string;
   isSelected: boolean;
   categoryLabel?: string;
   categoryType?: BadgeType;
-  onClick: (isSelected: boolean) => void;
+  onClick: (isSelected: boolean, id: string) => void;
 }
 
 interface CategoryLabelProps {
@@ -36,7 +37,7 @@ function CategoryLabel(props: CategoryLabelProps): JSX.Element {
 }
 
 export function SelectableRow(props: Props): JSX.Element {
-  const { title, subtitle, isSelected, categoryLabel, categoryType, onClick } = props;
+  const { title, subtitle, isSelected, categoryLabel, categoryType, onClick, id } = props;
 
   const className = classnames({
     SelectableRow: true,
@@ -44,7 +45,7 @@ export function SelectableRow(props: Props): JSX.Element {
   });
 
   function toggle(): void {
-    onClick(!isSelected);
+    onClick(!isSelected, id);
   }
 
   function onKeyDown(e: React.KeyboardEvent): void {
