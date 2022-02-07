@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import _ from 'lodash';
 import ago from 's-ago';
 import moment from 'moment';
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { parsePhoneNumberFromString, AsYouType, validatePhoneNumberLength } from 'libphonenumber-js';
 import formatDate from 'date-fns/format';
 import { Cell, Formatter } from './types';
 import { DatePicker } from '../../date-picker';
@@ -279,6 +279,18 @@ export function phoneNumber(value: Cell): JSX.Element {
     return <TextLink href={parsedPhone.getURI()}>{parsedPhone.formatNational()}</TextLink>;
   }
   return <Text>{value}</Text>;
+}
+
+export function parsePhoneNumberUS(newValue?: string, oldValue?: string): string {
+  if (!newValue) {
+    return '';
+  }
+
+  if (validatePhoneNumberLength(newValue, 'US') === 'TOO_LONG') {
+    return oldValue
+  }
+
+  return parsePhoneNumberFromString(newValue, 'US')?.nationalNumber || new AsYouType('US').input(newValue)
 }
 
 type Label<T> = (
