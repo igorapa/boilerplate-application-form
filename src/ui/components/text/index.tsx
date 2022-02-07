@@ -19,10 +19,11 @@ export const textColors: GenericObject = {
   transparent: 'transparent',
   warning: colors.fire[400],
   white: '#ffffff',
+  black: '#000',
 };
 
 export type HexColor = string;
-export type TextSizes = 'small' | 'regular' | 'large' | 'extraLarge';
+export type TextSizes = 'small' | 'regular' | 'large' | 'largeX' | 'extraLarge';
 export type TextColors =
   | 'active'
   | 'alert'
@@ -33,6 +34,7 @@ export type TextColors =
   | 'light'
   | 'warning'
   | 'white'
+  | 'black'
   | 'inherit';
 export type TextDecoration = 'underline' | 'strikethrough' | 'none';
 
@@ -56,6 +58,7 @@ interface TextProps {
   truncate?: boolean;
   weight?: 300 | 400 | 500 | 600 | 700;
   testId?: string;
+  onClick?: () => void
 }
 
 export function Text(props: TextProps): JSX.Element {
@@ -78,6 +81,7 @@ export function Text(props: TextProps): JSX.Element {
     truncate = false,
     weight = '400',
     testId,
+    onClick,
   } = props;
 
   const classNames = classnames({
@@ -85,6 +89,7 @@ export function Text(props: TextProps): JSX.Element {
     alignRight: textAlign === 'right',
     breakword: breakword === true,
     extraLarge: size === 'extraLarge',
+    largeX: size === 'largeX',
     large: size === 'large',
     nowrap: nowrap === true,
     prewrap: prewrap === true,
@@ -104,6 +109,7 @@ export function Text(props: TextProps): JSX.Element {
       tabIndex={tabIndex}
       className={classNames}
       data-testid={testId}
+      onClick={onClick}
       style={{
         ...style,
         fontWeight: weight,
@@ -132,6 +138,10 @@ const StyledText = styled.span`
   &.large {
     font-size: 16px;
     line-height: 24px;
+  }
+  &.largeX {
+    font-size: 20px;
+    line-height: 27.24px;
   }
   &.extraLarge {
     font-size: 24px;
