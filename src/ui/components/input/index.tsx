@@ -138,7 +138,7 @@ function InputControl(props: Props): JSX.Element {
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void {
-    let value = e.target.value.trim()
+    let value = e.target.value
     if (debounce && debouncedOnChange) {
       debouncedOnChange(value);
     } else {
