@@ -6,8 +6,10 @@ import styled, { css } from 'styled-components';
 import { IconDate, IconSearch } from './icons';
 import { colors, fontFamilies } from '../../theme';
 import { useDebouncedCallback } from '../../hooks/debounced-callback';
+import { parsePhoneNumberUS } from '../table/lib/formatters';
 import { Text } from '../text';
 import { Spinner } from '../spinner';
+import { parsePhoneNumberFromString, AsYouType, CountryCode } from 'libphonenumber-js';
 
 type CallbackRef = (node: HTMLElement) => void;
 
@@ -40,9 +42,12 @@ interface Props {
   autoComplete?: 'on' | 'off' | boolean;
   appendText?: string;
   style?: React.CSSProperties;
+  autoFocus?: boolean
+  country?: CountryType
 }
 
-type ChangeHandler = (value: string) => void;
+type ChangeHandler = (value: string, error: string) => void;
+type CountryType = 'US'
 type InputType =
   | 'text'
   | 'textarea'
@@ -59,6 +64,34 @@ function getIcon(type: InputType): React.ReactNode {
   if (type === 'date') return <IconDate />;
   if (type === 'search') return <IconSearch />;
   return null;
+}
+
+function isValidText(value: string): boolean {
+  return Boolean(value.trim())
+}
+
+function isValidPhoneNumber(value: string, country: CountryCode = 'US'): boolean {
+  return Boolean(parsePhoneNumberFromString(value, country)?.isValid())
+}
+
+function getTextError(value: string, isRequired: boolean) {
+  if (isRequired && !isValidText(value)) {
+    return 'This field is required'
+  }
+
+  return ''
+}
+
+function getPhoneError(parsedPhone: string, isRequired: boolean) {
+  if (isRequired && !isValidText(parsedPhone)) {
+    return 'This field is required'
+  }
+
+  if (!isValidPhoneNumber(parsedPhone)) {
+    return 'This phone is not valid'
+  }
+
+  return ''
 }
 
 function InputControl(props: Props): JSX.Element {
@@ -85,19 +118,36 @@ function InputControl(props: Props): JSX.Element {
     value,
     autoComplete = true,
     style,
+    autoFocus,
+    country,
   } = props;
-
+  const isPhone = type === 'tel'
   const debouncedOnChange = useDebouncedCallback(onChange, debounce);
   const isReadOnly = isUndefined(onChange);
 
   // There are some cases where we're using this component in JavaScript files
   // and null, boolean, and array values may be passed in. This won't throw an error
   // but it will render the value toString in the input, which is bad UX.
-  const normalizedValue = typeof value === 'string' || typeof value === 'number' ? value : undefined;
+  let normalizedValue = typeof value === 'string' || typeof value === 'number' ? value : undefined;
+  if (isPhone && normalizedValue !== undefined) {
+    normalizedValue = new AsYouType(country).input(String(normalizedValue))
+    const parsePhoneNumber = parsePhoneNumberFromString(normalizedValue, 'US')
+    if (parsePhoneNumber) {
+      normalizedValue = parsePhoneNumber.nationalNumber.length < 4 ? parsePhoneNumber.nationalNumber : normalizedValue
+    }
+  }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void {
-    if (debouncedOnChange) {
-      debouncedOnChange(e.target.value);
+    let value = e.target.value.trim()
+    if (debounce && debouncedOnChange) {
+      debouncedOnChange(value);
+    } else {
+      if (isPhone) {
+        const parsedPhone = parsePhoneNumberUS(value, String(normalizedValue))
+        onChange(parsePhoneNumberUS(value, String(normalizedValue)), getPhoneError(parsedPhone, isRequired))
+      } else {
+        onChange(value, getTextError(value, isRequired))
+      }
     }
   }
 
@@ -128,13 +178,13 @@ function InputControl(props: Props): JSX.Element {
         value={normalizedValue}
         minHeight={height}
         maxLength={maxLength}
-        required={isRequired}
         onChange={handleChange}
         onFocus={onFocus}
         onBlur={(e) => {
           if (onBlur) onBlur(e.target.value);
         }}
         style={style}
+        autoFocus={autoFocus}
       />
     );
   }
@@ -153,7 +203,6 @@ function InputControl(props: Props): JSX.Element {
         disabled={disabled || isReadOnly}
         value={normalizedValue}
         readOnly={isReadOnly}
-        required={isRequired}
         style={{
           width: width || '100%',
           ...style,
@@ -164,9 +213,15 @@ function InputControl(props: Props): JSX.Element {
           if (onBlur) onBlur(e.target.value);
         }}
         autoComplete={autoComplete === true || autoComplete === 'on' ? 'on' : 'off'}
+        autoFocus={autoFocus}
       />
     </>
   );
+}
+
+InputControl.defaultProps = {
+  autoFocus: false,
+  country: 'US',
 }
 
 export function Input(props: Props): JSX.Element {
