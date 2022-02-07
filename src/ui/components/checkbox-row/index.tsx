@@ -19,7 +19,7 @@ export function CheckboxRow(props: Props): JSX.Element {
     <Flexbox>
       <Checkbox testId={testId} isActive={isActive} onClick={onClick} disabled={disabled} />
       <Padding left={8} right={4}>
-        <Text color={disabled ? 'light' : 'default'}>{label}</Text>
+        <Text color={disabled ? 'light' : 'default'} onClick={() => onClick(!isActive)}>{label}</Text>
       </Padding>
       {count ? <Text color="light">({count})</Text> : null}
     </Flexbox>
