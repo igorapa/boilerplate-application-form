@@ -11,6 +11,7 @@ const backgroundColors: GenericObject = {
   dark: colors.primary_xd,
   light: '#aaa',
   extraLight: colors.gray_xl,
+  xxLight: colors.gray_xxl,
   primary: colors.primary,
   transparent: 'transparent',
   white: '#fff',
@@ -18,7 +19,7 @@ const backgroundColors: GenericObject = {
 
 type BorderRadius = 0 | 3 | 6 | 10;
 type BoxShadow = 'overlay' | 'card' | 'none';
-type BackgroundColors = 'white' | 'light' | 'dark';
+type BackgroundColors = 'white' | 'light' | 'dark' | 'xxLight';
 
 interface Props {
   id?: string;
@@ -38,6 +39,7 @@ interface Props {
   elementRef?: React.RefObject<HTMLElement>;
   style?: React.CSSProperties;
   width?: number;
+  height?: number;
 }
 
 const shadows = {
@@ -64,6 +66,7 @@ export function Box(props: Props): JSX.Element {
     elementRef,
     style,
     width,
+    height,
   } = props;
 
   const boxBackgroundColor = backgroundColors[backgroundColor];
@@ -86,6 +89,7 @@ export function Box(props: Props): JSX.Element {
       borderLeftRadius={borderLeftRadius}
       boxShadow={boxShadow}
       width={width}
+      height={height}
     >
       {children}
     </StyledBox>
@@ -110,4 +114,5 @@ const StyledBox = styled.div`
     borderBottomRadius || borderRightRadius || borderRadius}px;
   box-shadow: ${({ boxShadow }: Props) => (boxShadow ? `${shadows[boxShadow]}` : 'none')};
   width: ${({ width }: Props) => (width ? `${width}px` : 'auto')};
+  height: ${({ height }: Props) => (height ? `${height}%` : 'auto')};
 `;
