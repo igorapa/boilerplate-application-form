@@ -10,10 +10,10 @@ import { EmployeeThumbnail, squircleClipPath } from '../employee-thumbnail';
 import { colors } from '../../theme/colors';
 
 interface Props {
-  name: string;
+  name?: string;
   imageUrl?: string | null;
   title?: string;
-  variant?: 'inline' | 'stacked';
+  variant?: 'inline' | 'stacked' | 'round';
 }
 
 function abbreviateTitle(title: string): string {
@@ -43,12 +43,14 @@ export function EmployeeProfile(props: Props): JSX.Element {
             <MiniIconPerson color={colors.steel[200]} />
           </StyledFallback>
         )}
-        <Padding left={8}>
-          <Text>
-            {name}
-            {title && `, ${abbreviateTitle(title)}`}
-          </Text>
-        </Padding>
+        {name &&
+          <Padding left={8}>
+            <Text>
+              {name}
+              {title && `, ${abbreviateTitle(title)}`}
+            </Text>
+          </Padding>
+        }
       </Flexbox>
     );
   }
@@ -56,7 +58,7 @@ export function EmployeeProfile(props: Props): JSX.Element {
   return (
     <Flexbox alignItems="center">
       {imageUrl ? (
-        <EmployeeThumbnail sizeInPixels={40} imageUrl={imageUrl} variant="squircle" />
+        <EmployeeThumbnail sizeInPixels={40} imageUrl={imageUrl} variant={variant === 'round' ? 'round' : 'squircle'} />
       ) : (
         <StyledFallback variant="squircle">
           <MiniIconPerson color={colors.steel[200]} />
