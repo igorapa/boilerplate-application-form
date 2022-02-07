@@ -1,0 +1,135 @@
+{
+	"data": [
+		{
+			"id": "a",
+			"title": "Who is the primary contact for this policy?",
+			"subtitle": "This person will receive all communications from Newfront about this policy. You can change this contact information later. If you’re not sure, just add your contact information.",
+			"fields": [
+				{
+					"id": "fullName",
+					"label": "Full name",
+					"isRequired": true,
+					"type": "text"
+				},
+				{
+					"id": "role",
+					"label": "Role",
+					"isRequired": false,
+					"type": "text"
+				},
+				{
+					"id": "phoneNumber",
+					"label": "Phone number",
+					"isRequired": true,
+					"type": "tel"
+				}
+			]
+		},
+		{
+			"id": "b",
+			"title": "Tell us about your company",
+			"subtitle": "",
+			"fields": [
+				{
+					"id": "companyName",
+					"label": "Company name",
+					"isRequired": true,
+					"type": "text"
+				},
+				{
+					"id": "fein",
+					"label": "What is your Federal Employer Identification Number? (FEIN)",
+					"isRequired": true,
+					"type": "text"
+				},
+				{
+					"id": "yearsInBusiness",
+					"label": "Years in business",
+					"isRequired": false,
+					"type": "number"
+				},
+				{
+					"id": "numberOfLocations",
+					"label": "Number of locations",
+					"isRequired": false,
+					"type": "number"
+				},
+				{
+					"id": "statesOporate",
+					"label": "In which states do you operate?",
+					"isRequired": false,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"id": "c",
+			"title": "Tell us about your employees",
+			"subtitle": "",
+			"fields": [
+				{
+					"id": "workInjuries",
+					"label": "What’s the name of the clinic, physician, or ER used for work injuries?",
+					"isRequired": false,
+					"type": "text"
+				},
+				{
+					"id": "groupMedicalInsurance",
+					"label": "Do you provide group medical insurance?",
+					"isRequired": false,
+					"type": "checkbox"
+				},
+				{
+					"id": "retirementOrPension",
+					"label": "Do you offer a retirement or pension plan?",
+					"isRequired": false,
+					"type": "checkbox"
+				},
+				{
+					"id": "paidVacation",
+					"label": "Do you give paid vacation?",
+					"isRequired": false,
+					"type": "checkbox",
+					"children": [
+						"paidVacationDetails"
+					]
+				},
+				{
+					"id": "paidVacationDetails",
+					"label": "Please provide details about the paid vacation",
+					"dependsOn": [
+						"paidVacation"
+					],
+					"isRequired": true,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"id": "d",
+			"title": "How do you want to pay for your policy?",
+			"subtitle": "",
+			"fields": [
+				{
+					"id": "policy",
+					"type": "selectable",
+					"defaultValue": "payNewfront",
+					"options": [
+						{
+							"id": "payNewfront",
+							"title": "I want to pay Newfront",
+							"subtitle": "You’ll pay Newfront instead of paying each insurance company separately. There are no fees.",
+							"categoryLabel": "RECOMMENDED",
+							"categoryType": "info"
+						},
+						{
+							"id": "payInsuranceCompany",
+							"title": "I want to pay the insurance company directly",
+							"subtitle": "You’ll receive bills from the insurance company and it will be your responsibility to make sure they are paid to keep your coverage."
+						}
+					]
+				}
+			]
+		}
+	]
+}

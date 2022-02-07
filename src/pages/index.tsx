@@ -1,6 +1,5 @@
-import React from 'react';
-import { Button } from '@/ui';
+import { FormCompensationApplication } from '@/ui';
 
 export default function IndexPage(): JSX.Element {
-  return <Button>Click me</Button>;
+  return <FormCompensationApplication />;
 }
