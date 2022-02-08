@@ -20,7 +20,6 @@ export default function FormBody(props: PropsFormBody): JSX.Element {
   const { title, subtitle, fields, draft, errors, onChangeDrafts, onChangeErrors } = props
 
   const handleOnChangeField = (id, value, errorMsg = '', children = []) => {
-    console.log('change', {id, value, errorMsg}, children)
     let childrenErrors = {}
     const newDraft = { ...draft, [id]: value }
     const error = errors[id]
