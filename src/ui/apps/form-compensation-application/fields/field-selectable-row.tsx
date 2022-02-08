@@ -1,16 +1,16 @@
-import * as React from 'react'
+import * as React from 'react';
 import { SelectableRow } from '@/ui';
 
 export default function FieldSelectableRow(props): JSX.Element {
-  const { id, options, defaultValue, onChange, value } = props
-  const [selected, setSelected] = React.useState(value || defaultValue)
+  const { id, options, defaultValue, onChange, value } = props;
+  const [selected, setSelected] = React.useState(value || defaultValue);
 
   const handleOnClick = (_, value) => {
-    setSelected(value)
-    onChange(id, value)
-  }
+    setSelected(value);
+    onChange(id, value);
+  };
 
-  return options.map(item => (
+  return options.map((item) => (
     <SelectableRow
       key={item.id}
       id={item.id}
@@ -21,5 +21,5 @@ export default function FieldSelectableRow(props): JSX.Element {
       categoryType={item.categoryType}
       onClick={handleOnClick}
     />
-  ))
+  ));
 }

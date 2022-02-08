@@ -287,10 +287,10 @@ export function parsePhoneNumberUS(newValue?: string, oldValue?: string): string
   }
 
   if (validatePhoneNumberLength(newValue, 'US') === 'TOO_LONG') {
-    return oldValue
+    return oldValue;
   }
 
-  return parsePhoneNumberFromString(newValue, 'US')?.nationalNumber || new AsYouType('US').input(newValue)
+  return parsePhoneNumberFromString(newValue, 'US')?.nationalNumber || new AsYouType('US').input(newValue);
 }
 
 type Label<T> = (

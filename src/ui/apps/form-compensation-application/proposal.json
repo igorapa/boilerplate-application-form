@@ -7,10 +7,7 @@
       "name": "personName",
       "label": "Person Name",
       "description": "",
-      "validations": [
-        "isRequired",
-        "hasFirstLastName"
-      ],
+      "validations": ["isRequired", "hasFirstLastName"],
       "step": 1,
       "order": 1,
       "dependsOn": []
@@ -24,9 +21,7 @@
       "validations": [],
       "step": 1,
       "order": 2,
-      "dependsOn": [
-        "personName"
-      ]
+      "dependsOn": ["personName"]
     },
     "insurances": {
       "id": "c",
@@ -51,9 +46,7 @@
         }
       ],
       "description": "",
-      "validations": [
-        "isRequiredMinTwo"
-      ],
+      "validations": ["isRequiredMinTwo"],
       "step": 2,
       "order": 1,
       "dependsOn": []
@@ -76,14 +69,10 @@
         }
       ],
       "description": "foo bar",
-      "validations": [
-        "isRequired"
-      ],
+      "validations": ["isRequired"],
       "step": 2,
       "order": 2,
-      "dependsOn": [
-        "insurances"
-      ]
+      "dependsOn": ["insurances"]
     },
     "personEmail": {
       "id": "d",
@@ -91,15 +80,10 @@
       "name": "personEmail",
       "label": "Your email",
       "description": "",
-      "validations": [
-        "isRequired",
-        "isEmailValid"
-      ],
+      "validations": ["isRequired", "isEmailValid"],
       "step": 2,
       "order": 3,
-      "dependsOn": [
-        "policies"
-      ]
+      "dependsOn": ["policies"]
     },
     "personPhoneNumber": {
       "id": "d",
@@ -107,15 +91,10 @@
       "name": "personPhoneNumber",
       "label": "Your phone Number",
       "description": "",
-      "validations": [
-        "isRequired",
-        "isPhoneValid"
-      ],
+      "validations": ["isRequired", "isPhoneValid"],
       "step": 2,
       "order": 4,
-      "dependsOn": [
-        "policies"
-      ]
+      "dependsOn": ["policies"]
     }
   }
 }

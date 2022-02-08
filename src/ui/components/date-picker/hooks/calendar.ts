@@ -69,9 +69,7 @@ function generateDateRows(initialDate: Moment): Day[][] {
     const first = firstRow[0];
 
     times(backfillBy, (num) => {
-      const d = moment(first.value)
-        .startOf('week')
-        .add(num, 'day');
+      const d = moment(first.value).startOf('week').add(num, 'day');
       firstRow.splice(num, 0, createDay(d, date));
     });
   }

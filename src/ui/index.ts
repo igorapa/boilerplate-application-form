@@ -153,4 +153,4 @@ export type { Color } from './theme/colors';
 export type { SpacingValue, Color as DeprecatedColor } from './theme';
 
 // apps
-export { default as FormCompensationApplication } from './apps/form-compensation-application'
+export { default as FormCompensationApplication } from './apps/form-compensation-application';

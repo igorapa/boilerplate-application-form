@@ -42,12 +42,12 @@ interface Props {
   autoComplete?: 'on' | 'off' | boolean;
   appendText?: string;
   style?: React.CSSProperties;
-  autoFocus?: boolean
-  country?: CountryType
+  autoFocus?: boolean;
+  country?: CountryType;
 }
 
 type ChangeHandler = (value: string, error: string) => void;
-type CountryType = 'US'
+type CountryType = 'US';
 type InputType =
   | 'text'
   | 'textarea'
@@ -67,31 +67,31 @@ function getIcon(type: InputType): React.ReactNode {
 }
 
 function isValidText(value: string): boolean {
-  return Boolean(value.trim())
+  return Boolean(value.trim());
 }
 
 function isValidPhoneNumber(value: string, country: CountryCode = 'US'): boolean {
-  return Boolean(parsePhoneNumberFromString(value, country)?.isValid())
+  return Boolean(parsePhoneNumberFromString(value, country)?.isValid());
 }
 
 function getTextError(value: string, isRequired: boolean) {
   if (isRequired && !isValidText(value)) {
-    return 'This field is required'
+    return 'This field is required';
   }
 
-  return ''
+  return '';
 }
 
 function getPhoneError(parsedPhone: string, isRequired: boolean) {
   if (isRequired && !isValidText(parsedPhone)) {
-    return 'This field is required'
+    return 'This field is required';
   }
 
   if (!isValidPhoneNumber(parsedPhone)) {
-    return 'This phone is not valid'
+    return 'This phone is not valid';
   }
 
-  return ''
+  return '';
 }
 
 function InputControl(props: Props): JSX.Element {
@@ -121,7 +121,7 @@ function InputControl(props: Props): JSX.Element {
     autoFocus,
     country,
   } = props;
-  const isPhone = type === 'tel'
+  const isPhone = type === 'tel';
   const debouncedOnChange = useDebouncedCallback(onChange, debounce);
   const isReadOnly = isUndefined(onChange);
 
@@ -130,23 +130,23 @@ function InputControl(props: Props): JSX.Element {
   // but it will render the value toString in the input, which is bad UX.
   let normalizedValue = typeof value === 'string' || typeof value === 'number' ? value : undefined;
   if (isPhone && normalizedValue !== undefined) {
-    normalizedValue = new AsYouType(country).input(String(normalizedValue))
-    const parsePhoneNumber = parsePhoneNumberFromString(normalizedValue, 'US')
+    normalizedValue = new AsYouType(country).input(String(normalizedValue));
+    const parsePhoneNumber = parsePhoneNumberFromString(normalizedValue, 'US');
     if (parsePhoneNumber) {
-      normalizedValue = parsePhoneNumber.nationalNumber.length < 4 ? parsePhoneNumber.nationalNumber : normalizedValue
+      normalizedValue = parsePhoneNumber.nationalNumber.length < 4 ? parsePhoneNumber.nationalNumber : normalizedValue;
     }
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void {
-    let value = e.target.value
+    let value = e.target.value;
     if (debounce && debouncedOnChange) {
       debouncedOnChange(value);
     } else {
       if (isPhone) {
-        const parsedPhone = parsePhoneNumberUS(value, String(normalizedValue))
-        onChange(parsePhoneNumberUS(value, String(normalizedValue)), getPhoneError(parsedPhone, isRequired))
+        const parsedPhone = parsePhoneNumberUS(value, String(normalizedValue));
+        onChange(parsePhoneNumberUS(value, String(normalizedValue)), getPhoneError(parsedPhone, isRequired));
       } else {
-        onChange(value, getTextError(value, isRequired))
+        onChange(value, getTextError(value, isRequired));
       }
     }
   }
@@ -222,7 +222,7 @@ function InputControl(props: Props): JSX.Element {
 InputControl.defaultProps = {
   autoFocus: false,
   country: 'US',
-}
+};
 
 export function Input(props: Props): JSX.Element {
   const { style, type, appendText = null } = props;
@@ -241,10 +241,7 @@ export function Input(props: Props): JSX.Element {
   return (
     <StyledInputWrapper type={type}>
       {/* eslint-disable-next-line */}
-      <InputControl
-        {...props}
-        style={styles}
-      />
+      <InputControl {...props} style={styles} />
       <div className="input-icon">{icon}</div>
       {appendText ? (
         <StyledAppendedText ref={targetRef}>

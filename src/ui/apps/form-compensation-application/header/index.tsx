@@ -1,20 +1,12 @@
-import {
-  Text,
-  Box,
-  Padding,
-  Flexbox,
-  EmployeeProfile,
-  NewfrontLogo,
-  FlexCell,
-} from '@/ui';
+import { Text, Box, Padding, Flexbox, EmployeeProfile, NewfrontLogo, FlexCell } from '@/ui';
 
 interface PropsHeader {
   title: string;
-  imageUrlProfile?: string
+  imageUrlProfile?: string;
 }
 
 export default function Header(props: PropsHeader): JSX.Element {
-  const { title, imageUrlProfile } = props
+  const { title, imageUrlProfile } = props;
 
   return (
     <Box borderBottom={1} backgroundColor="white">
@@ -23,19 +15,12 @@ export default function Header(props: PropsHeader): JSX.Element {
           <NewfrontLogo />
           <FlexCell flex={1}>
             <Padding left={20}>
-              <Text color="black">
-                {title}
-              </Text>
+              <Text color="black">{title}</Text>
             </Padding>
           </FlexCell>
-          {Boolean(imageUrlProfile) &&
-            <EmployeeProfile
-              variant="round"
-              imageUrl={imageUrlProfile}
-            />
-          }
+          {Boolean(imageUrlProfile) && <EmployeeProfile variant="round" imageUrl={imageUrlProfile} />}
         </Flexbox>
       </Padding>
     </Box>
-  )
+  );
 }

@@ -43,14 +43,14 @@ export function EmployeeProfile(props: Props): JSX.Element {
             <MiniIconPerson color={colors.steel[200]} />
           </StyledFallback>
         )}
-        {name &&
+        {name && (
           <Padding left={8}>
             <Text>
               {name}
               {title && `, ${abbreviateTitle(title)}`}
             </Text>
           </Padding>
-        }
+        )}
       </Flexbox>
     );
   }

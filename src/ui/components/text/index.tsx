@@ -58,7 +58,7 @@ interface TextProps {
   truncate?: boolean;
   weight?: 300 | 400 | 500 | 600 | 700;
   testId?: string;
-  onClick?: () => void
+  onClick?: () => void;
 }
 
 export function Text(props: TextProps): JSX.Element {

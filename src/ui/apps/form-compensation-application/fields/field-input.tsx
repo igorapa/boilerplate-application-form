@@ -1,11 +1,8 @@
-import * as React from 'react'
-import {
-  Field,
-  Input,
-} from '@/ui';
+import * as React from 'react';
+import { Field, Input } from '@/ui';
 
 export default function FieldInput(props): JSX.Element {
-  const { id, type, label, onChange, error, isInvalid, value, autoFocus, isRequired  } = props;
+  const { id, type, label, onChange, error, isInvalid, value, autoFocus, isRequired } = props;
   return (
     <Field fieldId={id} label={label} error={isInvalid ? error : ''}>
       <Input
@@ -19,5 +16,5 @@ export default function FieldInput(props): JSX.Element {
         isInvalid={isInvalid}
       />
     </Field>
-  )
+  );
 }
