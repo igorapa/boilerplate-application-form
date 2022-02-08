@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { getTextError } from '../helpers';
+import { FieldType, DraftType, ErrorsType } from '../types';
 
 import { Text, Stack, Padding } from '@/ui';
 import FieldContainer from '../field-container';
@@ -8,8 +9,11 @@ interface PropsFormBody {
   isFirstField?: boolean;
   title: string;
   subtitle?: string;
-  onChangeDrafts: () => {};
-  onChangeErrors: () => {};
+  onChangeDrafts: (draft: DraftType<any>) => void;
+  onChangeErrors: (error: ErrorsType<any>) => void;
+  fields: FieldType[];
+  draft: DraftType<any>;
+  errors: ErrorsType<any>;
 }
 
 export default function FormBody(props: PropsFormBody): JSX.Element {

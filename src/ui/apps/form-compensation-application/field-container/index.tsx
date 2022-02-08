@@ -20,7 +20,8 @@ interface PropsFieldContainer {
   value: string | number | boolean;
   isInvalid: boolean;
   autoFocus: boolean;
-  onChange: () => void;
+  onChange: (id: string, value: string | number | boolean, errorMsg: string, children: string[]) => void;
+  error: string;
 }
 
 export default function FieldContainer(props: PropsFieldContainer): JSX.Element {

@@ -89,8 +89,8 @@ export default function FormContainer(props): JSX.Element {
                 subtitle={subtitle}
                 draft={draft}
                 errors={errors}
-                onChangeDrafts={setDraft}
-                onChangeErrors={setErrors}
+                onChangeDrafts={(draft) => setDraft(draft)}
+                onChangeErrors={(errors) => setErrors(errors)}
               />
               <FormFooter
                 textPrimary={isLastStep ? constants.TEXTS.buttonSubmit : constants.TEXTS.buttonNext}
