@@ -1,0 +1,121 @@
+{
+  "formId": "123",
+  "fields": {
+    "personName": {
+      "id": "a",
+      "type": "text",
+      "name": "personName",
+      "label": "Person Name",
+      "description": "",
+      "validations": [
+        "isRequired",
+        "hasFirstLastName"
+      ],
+      "step": 1,
+      "order": 1,
+      "dependsOn": []
+    },
+    "comment": {
+      "id": "b",
+      "type": "textarea",
+      "name": "comment",
+      "label": "Comment",
+      "description": "leave some tips",
+      "validations": [],
+      "step": 1,
+      "order": 2,
+      "dependsOn": [
+        "personName"
+      ]
+    },
+    "insurances": {
+      "id": "c",
+      "type": "checkbox",
+      "name": "insurances",
+      "label": "Select your insurances",
+      "options": [
+        {
+          "id": 1,
+          "name": "optionA",
+          "label": "Option A"
+        },
+        {
+          "id": 2,
+          "name": "optionB",
+          "label": "Option B"
+        },
+        {
+          "id": 3,
+          "name": "optionC",
+          "label": "Option C"
+        }
+      ],
+      "description": "",
+      "validations": [
+        "isRequiredMinTwo"
+      ],
+      "step": 2,
+      "order": 1,
+      "dependsOn": []
+    },
+    "policies": {
+      "id": "c",
+      "type": "radio",
+      "name": "policies",
+      "label": "Select one",
+      "options": [
+        {
+          "id": 1,
+          "name": "optionA",
+          "label": "Option A"
+        },
+        {
+          "id": 3,
+          "name": "optionC",
+          "label": "Option C"
+        }
+      ],
+      "description": "foo bar",
+      "validations": [
+        "isRequired"
+      ],
+      "step": 2,
+      "order": 2,
+      "dependsOn": [
+        "insurances"
+      ]
+    },
+    "personEmail": {
+      "id": "d",
+      "type": "email",
+      "name": "personEmail",
+      "label": "Your email",
+      "description": "",
+      "validations": [
+        "isRequired",
+        "isEmailValid"
+      ],
+      "step": 2,
+      "order": 3,
+      "dependsOn": [
+        "policies"
+      ]
+    },
+    "personPhoneNumber": {
+      "id": "d",
+      "type": "tel",
+      "name": "personPhoneNumber",
+      "label": "Your phone Number",
+      "description": "",
+      "validations": [
+        "isRequired",
+        "isPhoneValid"
+      ],
+      "step": 2,
+      "order": 4,
+      "dependsOn": [
+        "policies"
+      ]
+    }
+  }
+}
